@@ -1,16 +1,16 @@
-# foodville
+# Foodville
 
-A new Flutter application.
+A Flutter app that enables you to order food in a food court right from your table. No more waiting in long queues at counters.
 
-## Getting Started
+## Video Demo
+https://www.youtube.com/watch?v=8ReGZPO_WTs
 
-This project is a starting point for a Flutter application.
+## Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+| Home Screen              | Create Menu            | Menu                    | Place Order            |
+|:------------------------------:|:------------------------:|:----------------------:|:---------------------------:|
+| ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%201.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%202.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%203.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%204.png) |
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+|Cart                 | User Dashboard       | User's Order Summary    | Restaurant Dashboard    | Restaurant's Order Summary |
+|:-----------------------:|:--------------------------:|:-------------------------:|:----------------------------:|:---------------------------:|
+| ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%205.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%206.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%207.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%208.png) | ![](https://github.com/ahluwaliatikant/foodville/blob/master/images/Apple%20iPhone%2011%20Pro%20Max%20Screenshot%209.png) |
