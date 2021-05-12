@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "227147840944",
+    "project_id": "foodville-8a54f",
+    "storage_bucket": "foodville-8a54f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227147840944:android:d53e47976b9adb7f2bea75",
+        "android_client_info": {
+          "package_name": "atikant.foodville"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227147840944-3kanhpc51a2gos7r2v3ql92ik8jhtfhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsAY43J3v1z7Q9sh-XSF5W2-48HghaMK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227147840944-3kanhpc51a2gos7r2v3ql92ik8jhtfhp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
