@@ -6,14 +6,14 @@ class Item {
   String name;
   String description;
   double price;
-  String image;
+  String imageUrl;
 
   Item({
     @required this.id,
     this.name,
     this.description,
     this.price,
-    this.image,
+    this.imageUrl,
   });
 
   factory Item.fromJson(Map<String,dynamic> json){
@@ -22,7 +22,7 @@ class Item {
       name: json["itemName"],
       description: json["itemDescription"],
       price: json["costOfItem"],
-      image: json["itemImage"],
+      imageUrl: json["imageUrl"],
     );
   }
 
@@ -32,7 +32,7 @@ class Item {
       "name": item.name,
       "description": item.description,
       "price": item.price,
-      "image": item.image,
+      "imageUrl": item.imageUrl,
     };
   }
 }
