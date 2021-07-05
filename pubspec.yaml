@@ -34,6 +34,8 @@ dependencies:
   firebase_storage: ^8.0.5
   cached_network_image: ^3.0.0
   flutter_riverpod: ^0.14.0+3
+  http: ^0.13.3
+  uuid: ^3.0.4
   flutter:
     sdk: flutter
 

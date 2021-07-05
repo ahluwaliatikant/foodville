@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:foodville/models/restaurantModel.dart';
+import 'dart:convert';
 
 class FoodCourt {
   String id;
@@ -28,7 +29,8 @@ class FoodCourt {
       "id": foodCourt.id,
       "name": foodCourt.name,
       "location": foodCourt.location,
-      "restaurants": foodCourt.restaurants,
+      //"restaurants": foodCourt.restaurants,
+      "restaurants": foodCourt.restaurants.map((e) => e.toJson(e)).toList(),
     };
   }
 }

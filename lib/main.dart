@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodville/constants.dart';
 import 'package:foodville/screens/selectRolePage.dart';
 import 'package:foodville/screens/customerLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,7 +17,9 @@ import 'package:foodville/screens/restaurantProfileSetUp.dart';
 import 'package:foodville/screens/restaurantDashboard.dart';
 import 'package:foodville/screens/menuItem.dart';
 import 'package:foodville/screens/orderCard.dart';
-
+import 'package:foodville/screens/addFoodCourt.dart';
+import 'package:foodville/screens/selectFoodCourt.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +27,7 @@ void main() async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool login=prefs.getBool('login');
   //runApp(login==null?MyApp():login?MyApp1():MyApp());
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -47,9 +50,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
-              //primarySwatch: Colors.blue,
+              accentColor: mainRedColor,
             ),
-            home: SelectRole(),
+            home: AddFoodCourtScreen(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete
