@@ -16,11 +16,16 @@ class FoodCourt {
   });
 
   factory FoodCourt.fromJson(Map<String,dynamic> json){
+    List<Restaurant> restaurantList = [];
+    var jsonList = json["restaurants"];
+    jsonList.forEach((jsonRestaurant){
+      restaurantList.add(Restaurant.fromJson(jsonRestaurant));
+    });
     return FoodCourt(
       id: json["id"],
       name: json["name"],
       location: json["location"],
-      restaurants: json["restaurants"],
+      restaurants: restaurantList,
     );
   }
 

@@ -38,7 +38,7 @@ class Restaurant {
     return{
       "id": restaurant.id,
       "name": restaurant.name,
-      "foodCourt": restaurant.name,
+      "foodCourt": FoodCourt().toJson(restaurant.foodCourt),
       "menu": restaurant.menu,
       "logoImageUrl": restaurant.logoImageUrl,
       "currentOrders": restaurant.currentOrders,

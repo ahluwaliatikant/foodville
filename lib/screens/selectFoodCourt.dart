@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/models/foodCourtModel.dart';
 import 'package:foodville/providers/foodCourtProvider.dart';
+import 'package:foodville/screens/restaurantDetails.dart';
+import 'package:foodville/screens/selectRestaurant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SelectFoodCourt extends ConsumerWidget {
+  final searchController = new TextEditingController();
   @override
   Widget build(BuildContext context , ScopedReader watch) {
 
@@ -36,6 +39,7 @@ class SelectFoodCourt extends ConsumerWidget {
                     Container(
                       padding: EdgeInsets.only(left: 12 , right: 12),
                       child: TextFormField(
+                        controller: searchController,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
                             Icons.search,
@@ -48,18 +52,23 @@ class SelectFoodCourt extends ConsumerWidget {
                     ListView.separated(
                         shrinkWrap: true,
                         itemBuilder: (context , index){
-                          return ListTile(
-                            title: Text(
-                              list[index].name,
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                  color: mainRedColor,
-                                  fontSize: 20,
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => SelectRestaurant(foodCourt: list[index])));
+                            },
+                            child: ListTile(
+                              title: Text(
+                                list[index].name,
+                                style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                    color: mainRedColor,
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
-                            ),
-                            subtitle: Text(
-                              list[index].location,
+                              subtitle: Text(
+                                list[index].location,
+                              ),
                             ),
                           );
                         },

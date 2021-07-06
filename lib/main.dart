@@ -4,6 +4,7 @@ import 'package:foodville/screens/selectRolePage.dart';
 import 'package:foodville/screens/customerLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodville/screens/setMenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodville/screens/userDashboard.dart';
 import 'package:foodville/screens/otpScreen.dart';
@@ -19,6 +20,7 @@ import 'package:foodville/screens/menuItem.dart';
 import 'package:foodville/screens/orderCard.dart';
 import 'package:foodville/screens/addFoodCourt.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
+import 'package:foodville/screens/userDetails.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async{
@@ -48,11 +50,11 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'Foodville',
             theme: ThemeData(
               accentColor: mainRedColor,
             ),
-            home: AddFoodCourtScreen(),
+            home: SelectFoodCourt(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete
