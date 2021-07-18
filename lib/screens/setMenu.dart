@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:foodville/models/itemModel.dart';
 import 'package:foodville/models/restaurantModel.dart';
 import 'package:foodville/providers/menuProvider.dart';
+import 'package:foodville/screens/viewMenu.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/widgets/customTextField.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SetMenu extends StatelessWidget {
   final Restaurant restaurant;
@@ -42,16 +44,28 @@ class SetMenu extends StatelessWidget {
                       child: Badge(
                         badgeColor: Colors.white,
                         badgeContent: Text(itemsList.length.toString()),
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.white,
-                          size: 40,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ViewMenu(id: restaurant.id)));
+                          },
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                            size: 40,
+                          ),
                         ),
                       ),
                     );
                   },
                   loading: (){
-                    return Text("Loading");
+                    return Padding(
+                      padding: const EdgeInsets.only(top:5.0 , right: 16.0),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                        size: 40,
+                      ).shimmer(),
+                    );
                   },
                   error: (Object error , StackTrace stackTrace){
                     return Text("Error" + error.toString());
@@ -121,18 +135,16 @@ class SetMenu extends StatelessWidget {
                             onPressed: () async {
                               //send details for restaurant
                               if (menuFormKey.currentState.validate()) {
-                                //TODO send details for item
                                 Item item = new Item(
                                   id: Uuid().v4(),
                                   name: nameController.text,
-                                  price: double.parse(priceController.text),
+                                  price: int.parse(priceController.text),
                                   description: descController.text,
                                   imageUrl: "",
                                   restaurantId: restaurant.id,
                                 );
 
                                 context.read(menuController(restaurant.id).notifier).addItem(item);
-                                //TODO navigate to correct screen
                               }
                             },
                             style: TextButton.styleFrom(
@@ -151,6 +163,36 @@ class SetMenu extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     "ADD",
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                )),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                                //TODO Navigate to the restaurant home
+                            },
+                            style: TextButton.styleFrom(
+                              primary: mainRedColor,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(100))),
+                            ),
+                            child: Container(
+                                padding: EdgeInsets.all(12.0),
+                                width: width * 0.4,
+                                decoration: BoxDecoration(
+                                  color: mainRedColor,
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "PROCEED",
                                     style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
                                         color: Colors.white,

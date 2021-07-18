@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodville/constants.dart';
+import 'package:foodville/screens/restaurantDetails.dart';
 import 'package:foodville/screens/selectRolePage.dart';
 import 'package:foodville/screens/customerLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodville/screens/setMenu.dart';
+import 'package:foodville/screens/signUpRestaurant.dart';
+import 'package:foodville/screens/userHome.dart';
+import 'package:foodville/screens/viewMenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodville/screens/userDashboard.dart';
 import 'package:foodville/screens/otpScreen.dart';
@@ -22,6 +26,7 @@ import 'package:foodville/screens/addFoodCourt.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
 import 'package:foodville/screens/userDetails.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foodville/screens/signUpUser.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,11 +59,12 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               accentColor: mainRedColor,
             ),
-            home: SelectFoodCourt(),
+            //home: SignUpRestaurantScreen(),
+            home: ViewMenu(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete
-        return CustomerLogin();
+        return SignUpUserScreen();
       },
     );
 //    return

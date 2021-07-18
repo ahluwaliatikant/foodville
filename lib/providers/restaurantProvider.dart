@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/database/restaurantsDao.dart';
 import 'package:foodville/models/restaurantModel.dart';
 
-final restaurantsController = StateNotifierProvider<RestaurantNotifier , AsyncValue<Restaurant>>((ref) => RestaurantNotifier(ref.read));
+final restaurantsController = StateNotifierProvider<RestaurantNotifier , AsyncValue<Restaurant>>((ref) => RestaurantNotifier(ref.read) );
 
 class RestaurantNotifier extends StateNotifier<AsyncValue<Restaurant>>{
   RestaurantNotifier(this.read) : super(AsyncLoading()){

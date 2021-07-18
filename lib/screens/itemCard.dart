@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -7,9 +8,9 @@ class ItemCard extends StatefulWidget {
   String dishName;
   String dishDesc;
   String dishPrice;
-  File imageFile;
+  String imageUrl;
 
-  ItemCard({this.dishName , this.dishDesc , this.dishPrice , this.imageFile});
+  ItemCard({this.dishName , this.dishDesc , this.dishPrice , this.imageUrl});
   @override
   _ItemCardState createState() => _ItemCardState();
 }
@@ -44,8 +45,12 @@ class _ItemCardState extends State<ItemCard> {
                         topLeft: Radius.circular(30),
                         bottomLeft: Radius.circular(30),
                       ),
-                      child: Image.file(
-                        widget.imageFile,
+//                      child: Image.file(
+//                        widget.imageFile,
+//                        fit: BoxFit.fill,
+//                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.imageUrl,
                         fit: BoxFit.fill,
                       ),
                     ),

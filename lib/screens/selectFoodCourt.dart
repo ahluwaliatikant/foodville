@@ -8,10 +8,12 @@ import 'package:foodville/screens/selectRestaurant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SelectFoodCourt extends ConsumerWidget {
+  final bool isRestaurantLogin;
+  final String uid;
+  SelectFoodCourt({this.uid, this.isRestaurantLogin});
   final searchController = new TextEditingController();
   @override
-  Widget build(BuildContext context , ScopedReader watch) {
-
+  Widget build(BuildContext context, ScopedReader watch) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final state = watch(foodCourtsController);
@@ -32,74 +34,82 @@ class SelectFoodCourt extends ConsumerWidget {
       ),
       body: SafeArea(
         child: Container(
-          child: state.when(
-              data: (List<FoodCourt> list){
-                return Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 12 , right: 12),
-                      child: TextFormField(
-                        controller: searchController,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: matteBlack,
-                          ),
-                          hintText: "Search",
-                        ),
+          child: state.when(data: (List<FoodCourt> list) {
+            return Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 12, right: 12),
+                  child: TextFormField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: matteBlack,
                       ),
-                    ),
-                    ListView.separated(
-                        shrinkWrap: true,
-                        itemBuilder: (context , index){
-                          return GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SelectRestaurant(foodCourt: list[index])));
-                            },
-                            child: ListTile(
-                              title: Text(
-                                list[index].name,
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: mainRedColor,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                              subtitle: Text(
-                                list[index].location,
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context , index){
-                          return Divider(
-                            color: mainRedColor,
-                            thickness: 2,
-                          );
-                        },
-                        itemCount: list.length
-                    ),
-                  ],
-                );
-              },
-              loading: (){
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              error: (Object error , StackTrace stackTrace){
-                return Center(
-                  child: Text(
-                    "Error",
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 30,
+                      hintText: "Search",
                     ),
                   ),
-                );
-              }
-          ),
+                ),
+                ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          if (isRestaurantLogin) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RestaurantDetails(
+                                        foodCourt: list[index], uid: uid,)));
+                          }else{
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SelectRestaurant(
+                                        foodCourt: list[index])));
+                          }
+
+                        },
+                        child: ListTile(
+                          title: Text(
+                            list[index].name,
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                color: mainRedColor,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                          subtitle: Text(
+                            list[index].location,
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(
+                        color: mainRedColor,
+                        thickness: 2,
+                      );
+                    },
+                    itemCount: list.length),
+              ],
+            );
+          }, loading: () {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }, error: (Object error, StackTrace stackTrace) {
+            return Center(
+              child: Text(
+                "Error",
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 30,
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );

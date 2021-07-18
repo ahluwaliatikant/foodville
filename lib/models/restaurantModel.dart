@@ -6,7 +6,7 @@ import 'package:foodville/models/itemModel.dart';
 class Restaurant {
   String id;
   String name;
-  FoodCourt foodCourt;
+  String foodCourt;
   String logoImageUrl;
   List<Item> menu;
   List<Order> currentOrders;
@@ -35,10 +35,14 @@ class Restaurant {
   }
 
   Map<String,dynamic> toJson(Restaurant restaurant){
+
+    print("YE HAI RESTAURANT ID:" + restaurant.id);
+    print("RESTAURANT TO JSON MEIN ID: " + restaurant.foodCourt);
+
     return{
       "id": restaurant.id,
       "name": restaurant.name,
-      "foodCourt": FoodCourt().toJson(restaurant.foodCourt),
+      "foodCourt": restaurant.foodCourt,
       "menu": restaurant.menu,
       "logoImageUrl": restaurant.logoImageUrl,
       "currentOrders": restaurant.currentOrders,

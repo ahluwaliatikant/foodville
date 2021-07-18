@@ -2,21 +2,90 @@ import 'package:flutter/material.dart';
 import 'package:foodville/models/foodCourtModel.dart';
 import 'package:foodville/models/restaurantModel.dart';
 import 'package:foodville/providers/restaurantProvider.dart';
+import 'package:foodville/screens/setMenu.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/widgets/customTextField.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:foodville/database/uploadImage.dart';
 
-class RestaurantDetails extends StatelessWidget {
+class RestaurantDetails extends StatefulWidget {
   final FoodCourt foodCourt;
+  final String uid;
   RestaurantDetails({
     @required
-    this.foodCourt
+    this.foodCourt,
+    this.uid
   });
 
+  @override
+  _RestaurantDetailsState createState() => _RestaurantDetailsState();
+}
+
+class _RestaurantDetailsState extends State<RestaurantDetails> {
+  File _image;
   final restaurantDetailsFormKey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
+
+
+  _imageFromCamera() async {
+    PickedFile pickedImage = await ImagePicker.platform.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
+
+    setState(() {
+      _image = File(pickedImage.path);
+    });
+  }
+
+  _imageFromGallery() async {
+    PickedFile pickedImage = await ImagePicker.platform.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
+
+    setState(() {
+      _image = File(pickedImage.path);
+    });
+
+  }
+
+  _showPicker() {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+              child: Container(
+                child: Wrap(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.camera_alt),
+                      title: "Capture An Image".text.make(),
+                      onTap: () {
+                        _imageFromCamera();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: "Choose From Gallery".text.make(),
+                      onTap: () {
+                        _imageFromGallery();
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                ),
+              )
+          );
+        }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +143,40 @@ class RestaurantDetails extends StatelessWidget {
                                     color: mainRedColor,
                                     fontWeight: FontWeight.bold)),
                           ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _showPicker();
+                              });
+                            },
+                            child: CircleAvatar(
+                                radius: 100,
+                                //backgroundColor: Color(0xFF30475e),
+                                backgroundColor: mainRedColor,
+                                child: _image != null
+                                    ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.file(
+                                    _image,
+                                    fit: BoxFit.fill,
+                                  ),
+                                )
+                                    :Container(
+                                  decoration: BoxDecoration(
+                                    //color: Color(0xFF30475e),
+                                    color: mainRedColor,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 100,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                            ),
+                          ),
                           CustomTextField(
                             myController: nameController,
                             hint: "Name",
@@ -81,12 +184,17 @@ class RestaurantDetails extends StatelessWidget {
                           TextButton(
                             onPressed: () async {
                               //send details for restaurant
+
+                              String imageUrl = await UploadImage().addRestaurantLogoImage("", _image);
+                              print("PASSED ID :" + widget.foodCourt.id);
+                              print(widget.foodCourt.name);
+                              print(widget.foodCourt.location);
                               if (restaurantDetailsFormKey.currentState.validate()) {
                                 Restaurant restaurant = new Restaurant(
-                                  id: Uuid().v4(),
+                                  id: widget.uid,
                                   name: nameController.text,
-                                  foodCourt: foodCourt,
-                                  logoImageUrl: "",
+                                  foodCourt: widget.foodCourt.id,
+                                  logoImageUrl: imageUrl,
                                   menu: [],
                                   currentOrders: [],
                                   completedOrders: [],
@@ -95,7 +203,8 @@ class RestaurantDetails extends StatelessWidget {
                                     .read(restaurantsController.notifier)
                                     .addRestaurant(restaurant);
 
-                                //TODO navigate to correct screen
+                                //TODO navigate to set menu screen
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => SetMenu(restaurant: restaurant)));
                               }
                             },
                             style: TextButton.styleFrom(

@@ -88,7 +88,7 @@ class _CreateMenuState extends State<CreateMenu> {
                       dishName: listOfNames[index],
                       dishDesc: listOfDesc[index],
                       dishPrice: listOfPrice[index],
-                      imageFile: imageFiles[index],
+                      //imageUrl: imageFiles[index],
                     );
                   }),
             ],

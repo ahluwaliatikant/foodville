@@ -41,7 +41,8 @@ class SelectRestaurant extends StatelessWidget {
                         itemBuilder: (context , index){
                           return GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SetMenu(restaurant: list[index],)));
+                              //Navigator.push(context, MaterialPageRoute(builder: (context) => SetMenu(restaurant: list[index],)));
+                              //Navigator.push(context, MaterialPageRoute(builder: (context) => ));
                             },
                             child: ListTile(
                               title: Text(list[index].name),

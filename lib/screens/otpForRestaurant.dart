@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodville/screens/restaurantDashboard.dart';
+import 'package:foodville/screens/restaurantDetails.dart';
+import 'package:foodville/screens/selectFoodCourt.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodville/screens/profileSetUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodville/screens/restaurantProfileSetUp.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:foodville/database/restaurantsDao.dart';
 
 class OtpForRestaurant extends StatefulWidget {
   final String phoneNumber;
-  final String foodCourtName;
 
-  OtpForRestaurant(this.phoneNumber, this.foodCourtName);
+  OtpForRestaurant({this.phoneNumber});
 
   @override
   _OtpForRestaurantState createState() => _OtpForRestaurantState();
@@ -76,37 +79,28 @@ class _OtpForRestaurantState extends State<OtpForRestaurant> {
                         .then((value) async {
                       if (value.user != null) {
                         String uid = value.user.uid;
-                        final x = await FirebaseFirestore.instance
-                            .collection('food_courts')
-                            .doc(widget.foodCourtName)
-                            .collection('restaurants')
-                            .doc(uid)
-                            .get();
-                        if (x.exists) {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.setBool('login', true);
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RestaurantDashboard(
-                                        resId: value.user.uid,
-                                        foodCourtName: widget.foodCourtName,
-                                      )),
-                              (route) => false);
+                        final x = await context
+                                  .read(restaurantDbProvider)
+                                  .getRestaurantById(uid);
+                        //TODO check if restaurant with this id exists
+                        //store in bool x
+                        //x = null means does not exist
+                        if (x == null) {
+//                          SharedPreferences prefs =
+//                              await SharedPreferences.getInstance();
+//                          prefs.setBool('login', true);
+                          //TODO Navigator.pushAndRemoveUntil to select food court with isRestauarntLogin true
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectFoodCourt(isRestaurantLogin: true, uid: uid,)));
                         } else {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RestaurantProfileSetUp(
-                                        userID: value.user.uid,
-                                        foodCourtName: widget.foodCourtName,
-                                      )),
-                              (route) => false);
+                          //TODO Navigator.pushAndRemoveUntil to restaurant home
                         }
                       }
                     });
                   } catch (e) {
+
+                    print("MY ERROR");
+                    print(e);
+
                     FocusScope.of(context).unfocus();
                     _scaffoldkey.currentState
                         .showSnackBar(SnackBar(content: Text("Invalid OTP")));

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:foodville/models/userModel.dart';
+import 'package:foodville/providers/userProvider.dart';
+import 'package:foodville/screens/userHome.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/widgets/customTextField.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserDetails extends StatelessWidget {
   final userDetailsFormKey = GlobalKey<FormState>();
   final nameController = new TextEditingController();
+
+  final userId;
+  final phoneNumber;
+  UserDetails({this.userId , this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +77,19 @@ class UserDetails extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                                //TODO send details for user
+                              if(userDetailsFormKey.currentState.validate()){
+                                User user = new User(
+                                  id: userId,
+                                  name: nameController.text,
+                                  phoneNumber: phoneNumber,
+                                  completedOrders: [],
+                                  currentOrders: [],
+                                  profilePicUrl: ""
+                                );
+                                context.read(userController.notifier).addNewUser(user);
+
+                                Navigator.push(context , MaterialPageRoute(builder: (context) => UserHome()));
+                              }
                             },
                             style: TextButton.styleFrom(
                               primary: mainRedColor,

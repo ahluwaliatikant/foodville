@@ -3,10 +3,11 @@ import 'package:foodville/constants.dart';
 import 'package:foodville/screens/otpScreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodville/widgets/customTextField.dart';
+import 'package:foodville/screens/otpForRestaurant.dart';
 
-class SignUpUserScreen extends StatelessWidget {
+class SignUpRestaurantScreen extends StatelessWidget {
 
-  final signUpDetailsFormKey = GlobalKey<FormState>();
+  final signUpRestaurantDetailsFormKey = GlobalKey<FormState>();
   final phoneController = new TextEditingController();
 
   @override
@@ -53,12 +54,12 @@ class SignUpUserScreen extends StatelessWidget {
                           topRight: Radius.circular(50)),
                     ),
                     child: Form(
-                      key: signUpDetailsFormKey,
+                      key: signUpRestaurantDetailsFormKey,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "Enter Your Mobile Number",
+                            "Enter A Mobile Number",
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                                     fontSize: 30,
@@ -73,8 +74,8 @@ class SignUpUserScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              if(signUpDetailsFormKey.currentState.validate()) {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => OTPScreen(phoneController.text)));
+                              if(signUpRestaurantDetailsFormKey.currentState.validate()) {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => OtpForRestaurant(phoneNumber: phoneController.text)));
                               }
                             },
                             style: TextButton.styleFrom(

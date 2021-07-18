@@ -26,4 +26,22 @@ class RestaurantDao{
     return foodCourt.restaurants;
   }
 
+  Future getRestaurantById(String id) async {
+    print("IN GET RESTAURANT BY ID");
+    print(id);
+
+    var url = Uri.parse(baseUrl + "api/restaurants/$id");
+    var response = await http.get(url);
+
+    print(response.statusCode);
+    if(response.statusCode == 422){
+      return null;
+    }
+
+    var jsonResponse  = json.decode(response.body)['foodCourt'];
+    Restaurant restaurant = Restaurant.fromJson(jsonResponse);
+
+    return restaurant;
+  }
+
 }

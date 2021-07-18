@@ -15,6 +15,7 @@ class MenuNotifier extends StateNotifier<AsyncValue<List<Item>>>{
   final Reader read;
 
   void _init(String resId) async {
+    print("INSIDE INIT");
     List<Item> newMenu = await read(menuDbProvider).getAllItems(resId);
     state = AsyncData(newMenu);
   }
@@ -23,10 +24,10 @@ class MenuNotifier extends StateNotifier<AsyncValue<List<Item>>>{
     return state.data.value.length;
   }
 
-  void setInitialState(String id) async{
-    List<Item> menu = await read(menuDbProvider).getAllItems(id);
-    state = AsyncData(menu);
-  }
+//  void setInitialState(String id) async{
+//    List<Item> menu = await read(menuDbProvider).getAllItems(id);
+//    state = AsyncData(menu);
+//  }
 
   void addItem(Item item) async{
     state = AsyncLoading();

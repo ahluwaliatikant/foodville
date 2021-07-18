@@ -80,7 +80,7 @@ class _RestaurantLoginState extends State<RestaurantLogin> {
               ),
               ElevatedButton(
                 onPressed:() {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => OtpForRestaurant(_phoneNumberController.text , widget.foodCourtName)));
+                 // Navigator.of(context).push(MaterialPageRoute(builder: (context) => OtpForRestaurant(phoneNumber: _phoneNumberController.text ,foodCourtName: widget.foodCourtName)));
                 },
                 child: Text("Get OTP"),
                 style: ButtonStyle(

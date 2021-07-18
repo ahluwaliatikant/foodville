@@ -26,7 +26,9 @@ class MenuDao {
       //TODO
     }
 
-    Future getAllItems(String id) async{
+    Future
+    getAllItems(String id) async{
+      print("INSIDE GET ALL ITEMS");
       var url = Uri.parse(baseUrl + "api/menu/$id");
       var client = http.Client();
       var response = await client.get(url);

@@ -6,7 +6,7 @@ class Item {
   String id;
   String name;
   String description;
-  double price;
+  int price;
   String imageUrl;
   String restaurantId;
 
@@ -22,9 +22,9 @@ class Item {
   factory Item.fromJson(Map<String,dynamic> json){
     return Item(
       id: json["id"],
-      name: json["itemName"],
-      description: json["itemDescription"],
-      price: json["costOfItem"],
+      name: json["name"],
+      description: json["description"],
+      price: json["price"],
       imageUrl: json["imageUrl"],
       restaurantId: json["restaurantId"]
     );
