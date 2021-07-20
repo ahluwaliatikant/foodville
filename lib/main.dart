@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodville/constants.dart';
+import 'package:foodville/screens/placeOrderItemCard.dart';
+import 'package:foodville/screens/placeOrderScreen.dart';
 import 'package:foodville/screens/restaurantDetails.dart';
 import 'package:foodville/screens/selectRolePage.dart';
 import 'package:foodville/screens/customerLogin.dart';
@@ -60,11 +62,11 @@ class MyApp extends StatelessWidget {
               accentColor: mainRedColor,
             ),
             //home: SignUpRestaurantScreen(),
-            home: ViewMenu(),
+            home: PlaceOrderScreen(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete
-        return SignUpUserScreen();
+        return PlaceOrderScreen();
       },
     );
 //    return

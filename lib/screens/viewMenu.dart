@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/screens/itemCard.dart';
+import 'package:foodville/widgets/newItemCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/providers/menuProvider.dart';
@@ -36,12 +37,18 @@ class ViewMenu extends StatelessWidget {
                   return ListView.builder(
                       itemCount: itemsList.length,
                       itemBuilder: (context , index){
-                        return ItemCard(
-                          dishName: itemsList[index].name,
-                          dishDesc: itemsList[index].description,
-                          dishPrice: itemsList[index].price.toString(),
-                          imageUrl: itemsList[index].imageUrl,
-                        );
+//                        return ItemCard(
+//                          dishName: itemsList[index].name,
+//                          dishDesc: itemsList[index].description,
+//                          dishPrice: itemsList[index].price.toString(),
+//                          imageUrl: itemsList[index].imageUrl,
+//                        );
+                          return NewItemCard(
+                            dishPrice: itemsList[index].price.toString(),
+                            dishName: itemsList[index].name,
+                            dishDesc: itemsList[index].description,
+                            imageUrl: itemsList[index].imageUrl,
+                          );
                       }
                   );
             },
