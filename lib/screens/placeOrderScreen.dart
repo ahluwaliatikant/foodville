@@ -35,7 +35,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         actions: [
           GestureDetector(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewCart(id: widget.id,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewCart(resId: widget.id , )));
             },
             child: Icon(
               Icons.shopping_cart,
@@ -47,7 +47,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       body: SafeArea(
         child: Consumer(
           builder: (ctx, watch,child) {
-            return watch(menuController("test_rest_id")).when(
+            return watch(menuController(widget.id)).when(
                 data: (List<Item> itemsList){
                   itemsList.forEach((element) {
                     print(element.name);

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodville/database/userDao.dart';
 import 'package:foodville/screens/userDashboard.dart';
 import 'package:foodville/screens/userDetails.dart';
+import 'package:foodville/screens/userHome.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:foodville/screens/profileSetUp.dart';
@@ -84,6 +85,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs.setBool('login', true);
+
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -92,11 +94,12 @@ class _OTPScreenState extends State<OTPScreen> {
                                         phoneNumber: widget.phoneNumber,
                                       )));
                         } else {
+                          //if user already exists
+                          context.read(userController.notifier).setUserState(x);
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SetUpProfile(
-                                      value.user.uid, widget.phoneNumber)),
+                                  builder: (context) => UserHome()),
                               (route) => false);
                         }
                       }
@@ -132,12 +135,13 @@ class _OTPScreenState extends State<OTPScreen> {
             _verificationCode = verificationID;
           });
         },
-        codeAutoRetrievalTimeout: (String verificationID) {
-          setState(() {
-            _verificationCode = verificationID;
-          });
-        },
-        timeout: Duration(milliseconds: 60000));
+//        codeAutoRetrievalTimeout: (String verificationID) {
+//          setState(() {
+//            _verificationCode = verificationID;
+//          });
+//        },
+//        timeout: Duration(milliseconds: 60000)
+    );
   }
 
   @override

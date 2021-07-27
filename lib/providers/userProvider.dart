@@ -17,6 +17,14 @@ class UserNotifier extends StateNotifier<AsyncValue<User>>{
     state = AsyncData(newUser);
   }
 
+  void setUserState(User user){
+    state = AsyncData(user);
+  }
+
+  User getUserState() {
+    return state.data.value;
+  }
+
   void getUserById(String userId) async{
     state = AsyncLoading();
     User user = await read(userDbProvider).getUserById(userId);

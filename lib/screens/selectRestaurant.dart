@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodville/models/foodCourtModel.dart';
 import 'package:foodville/models/restaurantModel.dart';
 import 'package:foodville/providers/restaurantsProvider.dart';
+import 'package:foodville/screens/placeOrderScreen.dart';
 import 'package:foodville/screens/setMenu.dart';
 import 'package:foodville/screens/viewMenu.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,7 +43,7 @@ class SelectRestaurant extends StatelessWidget {
                         itemBuilder: (context , index){
                           return GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewMenu()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>PlaceOrderScreen(id: list[index].id,)));
                             },
                             child: ListTile(
                               title: Text(list[index].name),

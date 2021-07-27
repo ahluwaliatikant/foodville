@@ -16,6 +16,7 @@ class MenuNotifier extends StateNotifier<AsyncValue<List<Item>>>{
 
   void _init(String resId) async {
     print("INSIDE INIT");
+    print("RES ID: $resId");
     List<Item> newMenu = await read(menuDbProvider).getAllItems(resId);
     state = AsyncData(newMenu);
   }

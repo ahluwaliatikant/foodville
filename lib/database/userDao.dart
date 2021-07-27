@@ -34,7 +34,7 @@ class UserDao {
       return null;
     }
 
-    var jsonResponse  = json.decode(response.body)['foodCourt'];
+    var jsonResponse  = json.decode(response.body)['user'];
     User user = User.fromJson(jsonResponse);
 
     return user;

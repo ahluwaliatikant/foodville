@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodville/constants.dart';
 import 'package:foodville/providers/userProvider.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
+import 'package:foodville/screens/viewUserOrders.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/models/userModel.dart';
@@ -85,40 +86,46 @@ class UserHome extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      height: 200,
-                      width: width * 0.4,
-                      child: Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          color: mainRedColor,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 20,
-                                top: 20,
-                                child: Icon(
-                                  Icons.kitchen,
-                                  color: Colors.white,
-                                  size: 60,
+                    GestureDetector(
+                      onTap: (){
+                        print("TAPPEEEDDD");
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ViewUserOrders(userId: user.id,)));
+                      },
+                      child: Container(
+                        height: 200,
+                        width: width * 0.4,
+                        child: Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            color: mainRedColor,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 20,
+                                  top: 20,
+                                  child: Icon(
+                                    Icons.kitchen,
+                                    color: Colors.white,
+                                    size: 60,
+                                  ),
                                 ),
-                              ),
-                              Positioned(
-                                bottom: 20,
-                                right: 20,
-                                child: Text(
-                                  "In The\nKitchen",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                          color: mainBeigeColor,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold)),
-                                  textAlign: TextAlign.end,
-                                ),
-                              )
-                            ],
-                          )),
+                                Positioned(
+                                  bottom: 20,
+                                  right: 20,
+                                  child: Text(
+                                    "In The\nKitchen",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            color: mainBeigeColor,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.bold)),
+                                    textAlign: TextAlign.end,
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                     ),
                     Container(
                       height: 200,

@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
               accentColor: mainRedColor,
             ),
             //home: SignUpRestaurantScreen(),
-            home: PlaceOrderScreen(),
+            home: SignUpUserScreen(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete
