@@ -8,6 +8,7 @@ import 'package:foodville/providers/foodCourtProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodville/widgets/customTextField.dart';
 import 'package:uuid/uuid.dart';
+import 'package:foodville/screens/selectARolePage.dart';
 
 class AddFoodCourtScreen extends StatelessWidget {
   final foodCourtFormKey = GlobalKey<FormState>();
@@ -91,6 +92,11 @@ class AddFoodCourtScreen extends StatelessWidget {
                                     .addFoodCourt(foodCourt);
                                 nameController.clear();
                                 locationController.clear();
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SelectARole()),
+                                        (route) => false);
                               }
                             },
                             style: TextButton.styleFrom(

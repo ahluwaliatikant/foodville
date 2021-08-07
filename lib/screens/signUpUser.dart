@@ -92,7 +92,7 @@ class SignUpUserScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "ADD",
+                                    "Enter",
                                     style: GoogleFonts.poppins(
                                       textStyle: TextStyle(
                                         color: Colors.white,

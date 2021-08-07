@@ -37,19 +37,6 @@ class SelectFoodCourt extends ConsumerWidget {
           child: state.when(data: (List<FoodCourt> list) {
             return Column(
               children: [
-                Container(
-                  padding: EdgeInsets.only(left: 12, right: 12),
-                  child: TextFormField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: matteBlack,
-                      ),
-                      hintText: "Search",
-                    ),
-                  ),
-                ),
                 ListView.separated(
                     shrinkWrap: true,
                     itemBuilder: (context, index) {

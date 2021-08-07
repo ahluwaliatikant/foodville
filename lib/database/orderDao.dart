@@ -45,4 +45,49 @@ class OrderDao {
 
     return ordersList;
   }
+
+  Future getOrdersByRestaurant(String resId , String status) async{
+    var url = Uri.parse(baseUrl + "api/orders/restaurants/$resId/$status");
+
+    var response = await http.get(
+      url,
+    );
+
+    print("RESPONSE.BODY:");
+    print(response.body);
+    var jsonResponse = json.decode(response.body);
+
+    List<Order> ordersList = [];
+    var jsonList = jsonResponse['orders'];
+
+    jsonList.forEach((e) {
+      ordersList.add(Order.fromJson(e));
+    });
+
+    return ordersList;
+  }
+
+  void updateOrderStatus(String orderId , String status) async{
+    var url = Uri.parse(baseUrl + "api/orders");
+
+    var response = await http.put(
+      url,
+      body: {
+        "id": orderId,
+        "status": status,
+      },
+    );
+
+    print(response.statusCode);
+  }
+
+  void deleteOrder(String orderId) async{
+    print("in delete order");
+    print(orderId);
+    var url = Uri.parse(baseUrl + "api/orders/$orderId");
+    var response  = await http.put(
+        url
+    );
+    print(response.statusCode);
+  }
 }

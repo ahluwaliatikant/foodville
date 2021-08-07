@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:foodville/models/userModel.dart';
 import 'package:foodville/models/itemModel.dart';
+import 'dart:convert';
 
 class Order {
   String id;
@@ -10,6 +11,9 @@ class Order {
   String status;
   String restaurant;
   int totalAmount;
+  String restaurantImageUrl;
+  String placedByImageUrl;
+  Map<String,int> quantityMap;
 
   Order({
     @required this.id,
@@ -19,23 +23,35 @@ class Order {
     this.placedAt,
     this.placedBy,
     this.totalAmount,
+    this.restaurantImageUrl,
+    this.placedByImageUrl,
+    this.quantityMap,
   });
 
-  factory Order.fromJson(Map<String,dynamic> json){
+  factory Order.fromJson(Map<String,dynamic> myJson){
     List<Item> itemsList = [];
-    var jsonList = json["items"];
-    jsonList.forEach((jsonRestaurant){
-      itemsList.add(Item.fromJson(jsonRestaurant));
-    });
+    var jsonList = myJson["items"];
+    if(jsonList != null) {
+      jsonList.forEach((jsonItem) {
+        itemsList.add(Item.fromJson(jsonItem));
+      });
+    }
+
+    print("order ke andar ka done");
+
+    print(myJson);
 
     return Order(
-      id: json["id"],
+      id: myJson["id"],
       items: itemsList,
-      placedAt: DateTime.parse(json["placedAt"]),
-      placedBy: json["placedBy"]["name"],
-      restaurant: json["restaurant"]["name"],
-      status: json["status"],
-      totalAmount: json["totalAmount"]
+      placedAt: DateTime.parse(myJson["placedAt"]),
+      placedBy: myJson["placedBy"]["name"],
+      restaurant: myJson["restaurant"]["name"],
+      restaurantImageUrl: myJson['restaurant']['logoImageUrl'],
+      placedByImageUrl: myJson['placedBy']['profilePicUrl'],
+      status: myJson["status"],
+      totalAmount: myJson["totalAmount"],
+      quantityMap: Map<String,int>.from(json.decode(myJson["quantityMap"])),
     );
   }
 
@@ -48,7 +64,8 @@ class Order {
       "placedBy": order.placedBy,
       "restaurant": order.restaurant,
       "status": order.status,
-      "totalAmount": order.totalAmount
+      "totalAmount": order.totalAmount,
+      "quantityMap": order.quantityMap
     };
   }
 }

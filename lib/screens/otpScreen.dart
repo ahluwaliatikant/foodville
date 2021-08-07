@@ -135,12 +135,12 @@ class _OTPScreenState extends State<OTPScreen> {
             _verificationCode = verificationID;
           });
         },
-//        codeAutoRetrievalTimeout: (String verificationID) {
-//          setState(() {
-//            _verificationCode = verificationID;
-//          });
-//        },
-//        timeout: Duration(milliseconds: 60000)
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            _verificationCode = verificationID;
+          });
+        },
+        timeout: Duration(milliseconds: 10)
     );
   }
 

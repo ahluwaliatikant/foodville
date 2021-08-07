@@ -23,12 +23,14 @@ import 'package:foodville/screens/restaurantLogin.dart';
 import 'package:foodville/screens/restaurantProfileSetUp.dart';
 import 'package:foodville/screens/restaurantDashboard.dart';
 import 'package:foodville/screens/menuItem.dart';
-import 'package:foodville/screens/orderCard.dart';
+import 'package:foodville/widgets/orderCard.dart';
 import 'package:foodville/screens/addFoodCourt.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
 import 'package:foodville/screens/userDetails.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/screens/signUpUser.dart';
+import 'package:foodville/screens/newOrderSummary.dart';
+import 'package:foodville/screens/selectARolePage.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
               accentColor: mainRedColor,
             ),
             //home: SignUpRestaurantScreen(),
-            home: SignUpUserScreen(),
+            home: SelectARole(),
           );
         }
         // Otherwise, show something whilst waiting for initialization to complete

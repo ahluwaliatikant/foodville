@@ -9,8 +9,7 @@ class Restaurant {
   String foodCourt;
   String logoImageUrl;
   List<Item> menu;
-  List<Order> currentOrders;
-  List<Order> completedOrders;
+  List<Order> orders;
 
   Restaurant({
     this.id,
@@ -18,19 +17,41 @@ class Restaurant {
     this.foodCourt,
     this.menu,
     this.logoImageUrl,
-    this.currentOrders,
-    this.completedOrders,
+    this.orders,
   });
 
   factory Restaurant.fromJson(Map<String,dynamic> json){
+
+    print("in restaurant from json");
+    print(json['id']);
+
+    List<Item> menu = [];
+    var jsonList = json["menu"];
+    if(jsonList != null){
+      jsonList.forEach((jsonItem){
+        menu.add(Item.fromJson(jsonItem));
+      });
+    }
+    print("menu done");
+
+//    List<Order> ordersList = [];
+//    var jsonOrdersList = json['orders'];
+//    if(jsonOrdersList != null){
+//      jsonOrdersList.forEach((jsonOrder) {
+//        ordersList.add(Order.fromJson(jsonOrder));
+//      });
+//    }
+
+    print("orders done");
+
+
     return Restaurant(
       id: json["id"],
       name: json["name"],
       foodCourt: json["foodCourt"],
-      menu: json["menu"],
+      menu: menu,
       logoImageUrl: json["logoImageUrl"],
-      currentOrders: json["currentOrders"],
-      completedOrders: json["completedOrders"]
+      //orders: ordersList,
     );
   }
 
@@ -45,8 +66,7 @@ class Restaurant {
       "foodCourt": restaurant.foodCourt,
       "menu": restaurant.menu,
       "logoImageUrl": restaurant.logoImageUrl,
-      "currentOrders": restaurant.currentOrders,
-      "completedOrders": restaurant.completedOrders,
+      "orders": restaurant.orders,
     };
   }
 }

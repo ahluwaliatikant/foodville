@@ -150,7 +150,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                               });
                             },
                             child: CircleAvatar(
-                                radius: 100,
+                                radius: 80,
                                 //backgroundColor: Color(0xFF30475e),
                                 backgroundColor: mainRedColor,
                                 child: _image != null
@@ -170,7 +170,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   child: Center(
                                     child: Icon(
                                       Icons.camera_alt,
-                                      size: 100,
+                                      size: 80,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -185,7 +185,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             onPressed: () async {
                               //send details for restaurant
 
-                              String imageUrl = await UploadImage().addRestaurantLogoImage("", _image);
+                              String imageUrl = await UploadImage().addRestaurantLogoImage(widget.uid , _image);
                               print("PASSED ID :" + widget.foodCourt.id);
                               print(widget.foodCourt.name);
                               print(widget.foodCourt.location);
@@ -196,8 +196,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                                   foodCourt: widget.foodCourt.id,
                                   logoImageUrl: imageUrl,
                                   menu: [],
-                                  currentOrders: [],
-                                  completedOrders: [],
+                                  orders: [],
                                 );
                                 await context
                                     .read(restaurantsController.notifier)

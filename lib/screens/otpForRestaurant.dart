@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodville/providers/restaurantProvider.dart';
 import 'package:foodville/screens/restaurantDashboard.dart';
 import 'package:foodville/screens/restaurantDetails.dart';
+import 'package:foodville/screens/restaurantHome.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -80,24 +82,33 @@ class _OtpForRestaurantState extends State<OtpForRestaurant> {
                       if (value.user != null) {
                         String uid = value.user.uid;
                         final x = await context
-                                  .read(restaurantDbProvider)
-                                  .getRestaurantById(uid);
-                        //TODO check if restaurant with this id exists
-                        //store in bool x
-                        //x = null means does not exist
+                            .read(restaurantDbProvider)
+                            .getRestaurantById(uid);
+
+                        print("X:");
+                        print(x);
                         if (x == null) {
-//                          SharedPreferences prefs =
-//                              await SharedPreferences.getInstance();
-//                          prefs.setBool('login', true);
-                          //TODO Navigator.pushAndRemoveUntil to select food court with isRestauarntLogin true
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectFoodCourt(isRestaurantLogin: true, uid: uid,)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SelectFoodCourt(
+                                        isRestaurantLogin: true,
+                                        uid: uid,
+                                      )));
                         } else {
                           //TODO Navigator.pushAndRemoveUntil to restaurant home
+                          context
+                              .read(restaurantsController.notifier)
+                              .setRestaurantState(x);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RestaurantHome()),
+                              (route) => false);
                         }
                       }
                     });
                   } catch (e) {
-
                     print("MY ERROR");
                     print(e);
 
@@ -133,7 +144,7 @@ class _OtpForRestaurantState extends State<OtpForRestaurant> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(milliseconds: 60000));
+        timeout: Duration(milliseconds: 10));
   }
 
   @override

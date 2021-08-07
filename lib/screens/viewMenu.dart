@@ -37,17 +37,12 @@ class ViewMenu extends StatelessWidget {
                   return ListView.builder(
                       itemCount: itemsList.length,
                       itemBuilder: (context , index){
-//                        return ItemCard(
-//                          dishName: itemsList[index].name,
-//                          dishDesc: itemsList[index].description,
-//                          dishPrice: itemsList[index].price.toString(),
-//                          imageUrl: itemsList[index].imageUrl,
-//                        );
                           return NewItemCard(
                             dishPrice: itemsList[index].price.toString(),
                             dishName: itemsList[index].name,
                             dishDesc: itemsList[index].description,
                             imageUrl: itemsList[index].imageUrl,
+                            displayQty: false,
                           );
                       }
                   );

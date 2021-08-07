@@ -38,7 +38,7 @@ class RestaurantDao{
       return null;
     }
 
-    var jsonResponse  = json.decode(response.body)['foodCourt'];
+    var jsonResponse  = json.decode(response.body)['restaurant'];
     Restaurant restaurant = Restaurant.fromJson(jsonResponse);
 
     return restaurant;

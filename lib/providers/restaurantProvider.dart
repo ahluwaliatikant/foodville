@@ -16,6 +16,13 @@ class RestaurantNotifier extends StateNotifier<AsyncValue<Restaurant>>{
 //    List<Restaurant> listOfItems = await read(foodCourtDbProvider).getAllFoodCourts();
 //    state = AsyncData(listOfItems);
   }
+  void setRestaurantState(Restaurant restaurant) async {
+    state = AsyncData(restaurant);
+  }
+
+  void refreshRestaurantState(Restaurant restaurant) async {
+    state = AsyncData(restaurant);
+  }
 
   void addRestaurant(Restaurant restaurant) async{
     print(restaurant);

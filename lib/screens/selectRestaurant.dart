@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodville/models/foodCourtModel.dart';
 import 'package:foodville/models/restaurantModel.dart';
@@ -10,12 +11,8 @@ import 'package:foodville/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectRestaurant extends StatelessWidget {
-
   final FoodCourt foodCourt;
-  SelectRestaurant({
-    @required
-    this.foodCourt
-  });
+  SelectRestaurant({@required this.foodCourt});
 
   @override
   Widget build(BuildContext context) {
@@ -35,34 +32,68 @@ class SelectRestaurant extends StatelessWidget {
       body: SafeArea(
         child: Container(
           child: Consumer(
-            builder: (ctx, watch,child) {
+            builder: (ctx, watch, child) {
               return watch(restaurantsProviderFamily(foodCourt.id)).when(
-                  data: (List<Restaurant> list){
-                    return ListView.builder(
-                        itemCount: list.length,
-                        itemBuilder: (context , index){
-                          return GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>PlaceOrderScreen(id: list[index].id,)));
-                            },
-                            child: ListTile(
-                              title: Text(list[index].name),
+                  data: (List<Restaurant> list) {
+                return ListView.separated(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlaceOrderScreen(
+                                      id: list[index].id,
+                                    )));
+                      },
+                      child: ListTile(
+                        contentPadding: EdgeInsets.all(8.0),
+                        title: Text(
+                          list[index].name,
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              color: mainRedColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold
                             ),
-                          );
-                        }
+                          ),
+                        ),
+                        leading: CachedNetworkImage(
+                          imageUrl: list[index].logoImageUrl,
+                          imageBuilder: (context, imageProvider) => Container(
+                            width: 60.0,
+                            height: 60.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: imageProvider, fit: BoxFit.scaleDown),
+                            ),
+                          ),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                      ),
                     );
                   },
-                  loading: (){
-                    return Center(
-                      child: CircularProgressIndicator(),
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      color: mainRedColor,
+                      thickness: 2,
                     );
                   },
-                  error: (Object error, StackTrace stackTrace){
-                    return Center(
-                      child: Text("Error" + error.toString()),
-                    );
-                  }
-              );
+                );
+              }, loading: () {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }, error: (Object error, StackTrace stackTrace) {
+                return Center(
+                  child: Text("Error" + error.toString()),
+                );
+              });
             },
           ),
         ),
