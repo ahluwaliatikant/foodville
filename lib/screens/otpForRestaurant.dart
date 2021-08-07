@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodville/providers/restaurantProvider.dart';
-import 'package:foodville/screens/restaurantDashboard.dart';
 import 'package:foodville/screens/restaurantDetails.dart';
 import 'package:foodville/screens/restaurantHome.dart';
 import 'package:foodville/screens/selectFoodCourt.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:foodville/screens/profileSetUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:foodville/screens/restaurantProfileSetUp.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/database/restaurantsDao.dart';
 

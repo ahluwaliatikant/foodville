@@ -1,5 +1,3 @@
-//this is part of new one
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foodville/constants.dart';

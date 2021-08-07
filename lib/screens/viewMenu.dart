@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:foodville/constants.dart';
-import 'package:foodville/screens/itemCard.dart';
 import 'package:foodville/widgets/newItemCard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

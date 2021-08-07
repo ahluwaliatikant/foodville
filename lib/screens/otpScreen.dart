@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodville/database/userDao.dart';
-import 'package:foodville/screens/userDashboard.dart';
 import 'package:foodville/screens/userDetails.dart';
 import 'package:foodville/screens/userHome.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:foodville/screens/profileSetUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:foodville/constants.dart';
